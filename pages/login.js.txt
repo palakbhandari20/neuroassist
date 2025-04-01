@@ -1,0 +1,51 @@
+// pages/login.js
+
+import { useEffect } from "react";
+
+export default function Login() {
+  useEffect(() => {
+    const signInButton = document.getElementById("sign-in-button");
+    const signOutButton = document.getElementById("sign-out-button");
+    const userName = document.getElementById("user-name");
+
+    signInButton.addEventListener("click", () => {
+      const user = {
+        displayName: "User Name",
+        email: "user@example.com",
+        photoURL: "https://randomuser.me/api/portraits/men/10.jpg",
+      };
+
+      // Simulate setting user data
+      userName.textContent = user.displayName;
+      document.getElementById("user-info").classList.remove("hidden");
+      document.getElementById("sign-in-button").classList.add("hidden");
+    });
+
+    signOutButton.addEventListener("click", () => {
+      userName.textContent = "";
+      document.getElementById("user-info").classList.add("hidden");
+      document.getElementById("sign-in-button").classList.remove("hidden");
+    });
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div id="user-info" className="hidden bg-white p-6 rounded-lg shadow-md text-center">
+        <h2 id="user-name" className="text-lg font-semibold"></h2>
+        <button
+          id="sign-out-button"
+          className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+        >
+          Sign Out
+        </button>
+      </div>
+
+      <button
+        id="sign-in-button"
+        className="px-6 py-3 bg-blue-500 text-white rounded-lg text-lg font-semibold hover:bg-blue-600"
+      >
+        Sign in with Google
+      </button>
+    </div>
+  );
+}

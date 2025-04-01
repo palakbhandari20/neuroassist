@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroAssist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to NeuroAssist</h1>
+        <p>Helping Neurodiverse Individuals Live Independent Lives</p>
+    </header>
+
+    <section id="auth-section">
+        <button id="sign-in-button">Sign in with Google</button>
+        <div id="user-info" class="hidden">
+            <h2 id="user-name"></h2>
+            <p id="user-email"></p>
+            <button id="sign-out-button">Sign Out</button>
+        </div>
+    </section>
+
+    <!-- ✅ Ensure scripts are loaded in the correct order -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
