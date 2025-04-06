@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dyslexia Assist | NeuroAssist</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fdfcf8;
+      color: #1a1a1a;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #fdfcf8;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 30px 50px;
+      background-color: #fdfcf8;
+      justify-content: space-between;
+    }
+
+    body.dark-mode header {
+      background-color: #2e2e2e;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .header-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #3d2e1e;
+    }
+
+    body.dark-mode .header-title {
+      color: #f5e9d4;
+    }
+
+    .dyslexia-container {
+      display: flex;
+      flex-direction: row;
+      height: calc(100vh - 120px);
+    }
+
+    .half {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .left-half {
+      background-color: #fdfcf8;
+      border-right: 2px solid #e8e5dc;
+    }
+
+    body.dark-mode .left-half {
+      background-color: #2e2e2e;
+      border-right: 2px solid #444;
+    }
+
+    .right-half {
+      background-color: #f0ece3;
+    }
+
+    body.dark-mode .right-half {
+      background-color: #383838;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 15px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: none;
+      background-color: #fff;
+    }
+
+    body.dark-mode textarea {
+      background-color: #444;
+      color: #fff;
+      border: 1px solid #777;
+    }
+
+    select, button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 20px;
+      border: 1.5px solid #1a1a1a;
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    button:hover, select:hover {
+      background-color: #ddd3c3;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .tools {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tools button {
+      margin-right: 10px;
+    }
+
+    .audio-controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .font-buttons button {
+      margin-right: 10px;
+    }
+
+    .font-buttons span {
+      font-size: 14px;
+      margin-right: 5px;
+    }
+
+    .highlight span {
+      background-color: yellow;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    #highlightedText {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+      white-space: pre-wrap;
+    }
+
+    body.dark-mode #highlightedText {
+      background-color: #444;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="./logo_neuroassist.png" alt="Logo" />
+    </div>
+    <div class="header-title">Dyslexia Assist<br><small>Empowering Words with Voice & AI Support</small></div>
+  </header>
+
+  <div class="dyslexia-container">
+    <div class="half left-half">
+      <h2>Read with Me</h2><br>
+      <textarea id="text" placeholder="Type or paste text here..."></textarea>
+      <br />
+      <label for="voiceSelect">Choose Voice:</label>
+      <select id="voiceSelect"></select>
+      <br />
+      <div class="audio-controls">
+        <button onclick="speakText()">Play</button>
+        <button onclick="pauseText()">Pause</button>
+        <button onclick="resumeText()">Resume</button>
+        <button onclick="stopText()">Stop</button>
+      </div>
+      <div class="tools">
+        <div class="font-buttons">
+          <span>Font Size:</span>
+          <button onclick="changeFontSize('increase')">A+ (Increase)</button>
+          <button onclick="changeFontSize('decrease')">A- (Decrease)</button>
+        </div>
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        <button onclick="highlightWords()">Highlight Words</button>
+        <button onclick="splitSyllables()">Split Syllables</button>
+        <button onclick="startDictation()">🎙️ Voice Typing</button>
+        <button onclick="downloadHighlightedText()">Download Highlighted</button>
+        <button onclick="clearText()">Clear</button>
+      </div>
+      <br />
+
+      <div id="highlightedText" class="highlight"></div>
+    </div>
+
+    <div class="half right-half">
+      <h2>AI Assistant (Gemini)</h2>
+      <p>Click below to open Gemini in a new tab:</p>
+      <button onclick="askGemini()">Ask Gemini</button>
+      <p id="geminiResponse" style="margin-top: 10px; white-space: pre-line;"></p>
+
+      <br /><br />
+      <p><strong>Disclaimer:</strong> You must be signed in with a Google account to access Gemini. Some features might be limited based on region, age, or account settings.</p>
+    
+      <hr style="margin: 20px 0;">
+    
+      <h3>Ask Gemini via API</h3>
+      <textarea id="geminiPrompt" placeholder="Ask the Gemini AI something..." style="width: 100%; height: 100px; padding: 10px;"></textarea>
+      <br>
+      <button onclick="askGemini(document.getElementById('geminiPrompt').value)">Ask Gemini API</button>
+      <br><br>
+      <div id="geminiApiResponse" style="white-space: pre-wrap; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #ccc;"></div>
+    </div>    
+  </div>
+
+  <script>
+    let voices = [];
+    let currentUtterance = null;
+  
+    function populateVoiceList() {
+      voices = speechSynthesis.getVoices();
+      const voiceSelect = document.getElementById('voiceSelect');
+      voiceSelect.innerHTML = '';
+      voices.forEach((voice, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `${voice.name} (${voice.lang})`;
+        voiceSelect.appendChild(option);
+      });
+    }
+  
+    populateVoiceList();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = populateVoiceList;
+    }
+  
+    function speakText() {
+      stopText();
+      const text = document.getElementById('text').value;
+      const utterance = new SpeechSynthesisUtterance(text);
+      const selectedVoiceIndex = document.getElementById('voiceSelect').value;
+      utterance.voice = voices[selectedVoiceIndex];
+      currentUtterance = utterance;
+      speechSynthesis.speak(utterance);
+    }
+  
+    function pauseText() {
+      if (speechSynthesis.speaking && !speechSynthesis.paused) {
+        speechSynthesis.pause();
+      }
+    }
+  
+    function resumeText() {
+      if (speechSynthesis.paused) {
+        speechSynthesis.resume();
+      }
+    }
+  
+    function stopText() {
+      if (speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+        currentUtterance = null;
+      }
+    }
+  
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  
+    function changeFontSize(direction) {
+      const textarea = document.getElementById('text');
+      let style = window.getComputedStyle(textarea, null).getPropertyValue('font-size');
+      let currentSize = parseFloat(style);
+      if (direction === 'increase') textarea.style.fontSize = (currentSize + 2) + 'px';
+      else if (direction === 'decrease') textarea.style.fontSize = Math.max(12, currentSize - 2) + 'px';
+    }
+  
+    function highlightWords() {
+      const text = document.getElementById('text').value;
+      const words = text.split(/(\s+)/);
+      const highlighted = words.map(word => /\w/.test(word) ? `<span>${word}</span>` : word).join('');
+      document.getElementById('highlightedText').innerHTML = highlighted;
+    }
+  
+    function splitSyllables() {
+      const text = document.getElementById('text').value;
+      const words = text.split(/\s+/);
+      const processed = words.map(word => {
+        return word.replace(/([aeiouy]+)/gi, '$1-').replace(/-$/, '');
+      });
+      document.getElementById('highlightedText').innerHTML = processed.join(' ');
+    }
+  
+    function startDictation() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Sorry, your browser doesn't support speech recognition.");
+        return;
+      }
+      const recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+      recognition.onresult = function (event) {
+        document.getElementById('text').value += event.results[0][0].transcript + ' ';
+      };
+      recognition.onerror = function (event) {
+        alert('Speech recognition error: ' + event.error);
+      };
+      recognition.start();
+    }
+  
+    function downloadHighlightedText() {
+      const highlightedHTML = document.getElementById('highlightedText').innerHTML;
+      const textContent = document.createElement('div');
+      textContent.innerHTML = highlightedHTML;
+      const plainText = textContent.innerText;
+      const blob = new Blob([plainText], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'highlighted_text.txt';
+      link.click();
+    }
+  
+    function clearText() {
+      document.getElementById('text').value = '';
+      document.getElementById('highlightedText').innerHTML = '';
+      document.getElementById('geminiResponse').innerText = '';
+      stopText();
+    }
+  
+    // ✅ Gemini API integration
+    
+  // ... other functions stay unchanged
+
+  async function askGemini(customPrompt) {
+    const promptText = customPrompt || document.getElementById('text').value;
+    const outputDiv = customPrompt ? document.getElementById('geminiApiResponse') : document.getElementById('geminiResponse');
+    outputDiv.innerText = '🔄 Fetching from Gemini...';
+
+    try {
+      const response = await fetch('http://localhost:3000/api/gemini', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: promptText }),
+      });
+
+      const data = await response.json();
+      const reply = data.response?.trim();
+
+      if (reply) {
+        outputDiv.innerText = reply;
+      } else {
+        outputDiv.innerText = '⚠️ No response from Gemini. Trying Wikipedia...';
+        fetchFromWikipedia(promptText, outputDiv);
+      }
+    } catch (error) {
+      outputDiv.innerText = '❌ Gemini Error: ' + error.message + '\nTrying Wikipedia...';
+      fetchFromWikipedia(promptText, outputDiv);
+    }
+  }
+
+  async function fetchFromWikipedia(query, outputDiv) {
+    try {
+      const formattedQuery = query.trim().split(" ").join("_"); // format for Wikipedia titles
+      const apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(formattedQuery)}`;
+  
+      const response = await fetch(apiUrl, {
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+  
+      const data = await response.json();
+  
+      if (data.extract) {
+        outputDiv.innerText = `📚 Wikipedia says:\n\n${data.extract}`;
+      } else if (data.type === 'disambiguation') {
+        outputDiv.innerText = `⚠️ Your query matches multiple topics. Try being more specific.\n\n${data.extract}`;
+      } else {
+        outputDiv.innerText = '❌ No useful Wikipedia data found.';
+      }
+    } catch (err) {
+      outputDiv.innerText = '❌ Wikipedia Fetch Error: ' + err.message;
+    }
+  }
+  
+      
+  </script>
+  
+</body>
+</html>

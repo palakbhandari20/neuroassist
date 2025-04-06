@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASD Support Page</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fdf6f0;
+      color: #4e342e;
+    }
+
+    header {
+      background-color: #a1887f;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 2rem;
+      font-weight: bold;
+      border-bottom: 5px solid #d7ccc8;
+    }
+
+    .top-section {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2rem;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .box {
+      flex: 1;
+      min-width: 320px;
+      background-color: #fff8f0;
+      border: 2px solid #d7ccc8;
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .mood-slider {
+      text-align: center;
+    }
+
+    .slider-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .slider {
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+
+    .motivation {
+      font-size: 0.95rem;
+      color: #6d4c41;
+      font-style: italic;
+    }
+
+    .novels ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .novels li {
+      margin: 0.75rem 0;
+    }
+
+    .novels a {
+      text-decoration: none;
+      color: #5d4037;
+      font-weight: bold;
+    }
+
+    .music-section {
+      background-color: #fff8f0;
+      border-top: 5px solid #a1887f;
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .music-track {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      color: #6d4c41;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>Daily Wellness Hub</header>
+
+  <div class="top-section">
+    <!-- Mood Sliders -->
+    <div class="box mood-slider">
+      <h2>How Are You Feeling Today?</h2>
+      <div class="slider-group">
+        <label for="moodEnergy">Energy Level</label>
+        <input type="range" min="1" max="5" value="3" class="slider" id="moodEnergy" />
+        <p>Value: <span id="energyValue">3</span></p>
+        <p class="motivation" id="energyMotivation">Stay strong, you're doing great!</p>
+      </div>
+      <div class="slider-group">
+        <label for="moodCalm">Calmness</label>
+        <input type="range" min="1" max="5" value="3" class="slider" id="moodCalm" />
+        <p>Value: <span id="calmValue">3</span></p>
+        <p class="motivation" id="calmMotivation">Breathe in peace, breathe out stress.</p>
+      </div>
+      <div class="slider-group">
+        <label for="moodFocus">Focus</label>
+        <input type="range" min="1" max="5" value="3" class="slider" id="moodFocus" />
+        <p>Value: <span id="focusValue">3</span></p>
+        <p class="motivation" id="focusMotivation">One step at a time, you've got this!</p>
+      </div>
+    </div>
+
+    <!-- Novels Section -->
+    <div class="box novels">
+      <h2>Engaging Novels to Explore</h2>
+      <ul>
+        <li><a href="#" download="novel1.pdf">The Curious Mind (PDF)</a></li>
+        <li><a href="#" download="novel2.pdf">Wonders of Imagination (PDF)</a></li>
+        <li><a href="#" download="novel3.pdf">A Peaceful Story (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Music Section -->
+  <div class="music-section">
+    <h2>Soothing Soundscapes for Your Mind</h2>
+
+    <div class="music-track">
+      <strong>🌿 Bird's Forest</strong><br>
+      <audio controls>
+        <source src="./birds39-forest-20772.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="music-track">
+      <strong>🌊 Ocean Waves</strong><br>
+      <audio controls>
+        <source src="./ocean-waves-250310.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="music-track">
+      <strong>🌌 Night Sky Tones</strong><br>
+      <audio controls>
+        <source src="./night-ambience-17064.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <script>
+    const moodEnergy = document.getElementById("moodEnergy");
+    const moodCalm = document.getElementById("moodCalm");
+    const moodFocus = document.getElementById("moodFocus");
+    const energyValue = document.getElementById("energyValue");
+    const calmValue = document.getElementById("calmValue");
+    const focusValue = document.getElementById("focusValue");
+    const energyMotivation = document.getElementById("energyMotivation");
+    const calmMotivation = document.getElementById("calmMotivation");
+    const focusMotivation = document.getElementById("focusMotivation");
+
+    const getMotivation = (val, type) => {
+      const messages = {
+        Energy: [
+          "Take it easy today. Rest matters!",
+          "A slow pace is okay. Keep going!",
+          "You're halfway there!",
+          "Almost at your best, awesome!",
+          "You're glowing with energy today!"
+        ],
+        Calm: [
+          "It’s okay to feel a bit off. Breathe.",
+          "Storms pass, peace comes.",
+          "Stay grounded and let go.",
+          "You're centered and calm.",
+          "Serenity looks good on you!"
+        ],
+        Focus: [
+          "Distractions are normal. Refocus.",
+          "Stay with it, you're capable.",
+          "Keep your eyes on the goal.",
+          "You're productive and strong.",
+          "Laser-sharp! You're on fire!"
+        ]
+      };
+      return messages[type][val - 1];
+    };
+
+    moodEnergy.oninput = function () {
+      energyValue.textContent = this.value;
+      energyMotivation.textContent = getMotivation(this.value, "Energy");
+    };
+    moodCalm.oninput = function () {
+      calmValue.textContent = this.value;
+      calmMotivation.textContent = getMotivation(this.value, "Calm");
+    };
+    moodFocus.oninput = function () {
+      focusValue.textContent = this.value;
+      focusMotivation.textContent = getMotivation(this.value, "Focus");
+    };
+  </script>
+</body>
+</html>

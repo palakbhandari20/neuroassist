@@ -1,0 +1,132 @@
+/* Reset & Base */
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background-color: #f9f8f3;
+    color: #1a1a1a;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .page-wrapper {
+    margin: 0 auto;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 50px;
+    background-color: #cec6ac;
+    height: 10px;
+  }
+  
+  .logo {
+    height: 50px;
+    border-radius: 60%;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 40px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .nav a.active {
+    font-weight: bold;
+  }
+  
+  .profile-icon {
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  }
+  
+  .icon-circle {
+    height: 24px;
+    width: 24px;
+    background-color: #9a7b2f;
+    border-radius: 50%;
+  }
+  
+  /* Main Content */
+  .main-content {
+    display: flex;
+    padding: 50px;
+    background-color: #f9f8f3;
+  }
+  
+  .left-image {
+    flex: 1;
+    background-color: #e9e6de;
+    
+    
+    align-items: center;
+    padding: 40px;
+  }
+  
+  .image-box {
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.02);
+    width: 100%;
+    margin-top: 0px;
+  }
+  
+  .image-box img {
+    height: 400px;
+    object-fit: contain;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 0px;
+  }
+  
+  /* Text Side */
+  .right-text {
+    flex: 1;
+    padding: 40px 50px;
+  }
+  
+  .right-text h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+  
+  .right-text h2 {
+    font-size: 14px;
+    letter-spacing: 4px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+  
+  .right-text p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    max-width: 90%;
+  }
+  
+  .register-btn {
+    padding: 10px 30px;
+    border: 1px solid #000;
+    background: rgb(175, 24, 24);
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #f9f8f3;
+    transition: 0.3s ease;
+  }
+  
+  .register-btn:hover {
+    background-color: #000;
+    color: white;
+  }
+  

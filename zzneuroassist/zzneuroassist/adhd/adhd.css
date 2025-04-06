@@ -1,0 +1,145 @@
+
+.tasks-container {
+    max-height: 100px; /* Adjust as needed */
+    overflow-y: auto;
+    margin: 10px; /* Optional spacing */
+    border: 1px solid #ccc; /* Optional visual border */
+    padding: 5px;
+  }
+  #anchor{
+    margin-left: 25%;
+  }
+  /* Optional: Style for each dynamically created task */
+  .new-task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f4;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  .new-task button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 2px 5px;
+  }
+  nav{
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(178, 160, 138);
+    
+}
+nav h1{
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgb(121, 31, 31);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.body{
+    height: 100vh;
+}
+.content{
+    display: flex;
+    background-color: rgb(212, 205, 195);
+}
+
+.todolist{
+    width: 48%;
+    margin: 1%;
+}
+.todolist h1{
+    margin-left: 25%;
+    color: rgb(121, 31, 31);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+}
+.task{
+    display: flex;
+    height: 150px;
+}
+.tasking{
+    width: 80%;
+    height: 40px;
+    margin-left: 20px;
+}
+.add{
+    width: 5%;
+    margin-left: 5px;
+    height: 45px;
+}
+
+.calender{
+    width: 45%;
+    margin: 1%;
+}
+.calender h1{
+    margin-left: 25%;
+    color: rgb(121, 31, 31);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.image{
+    display: flex;
+    margin: 30px;
+}
+.calimg{
+    height: 150px;
+    margin-left: 40%;
+    border-radius: 50%;
+}
+
+.games {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(230, 222, 209);
+    
+}
+
+.games h1 {
+    font-size: 2 rem;
+    margin-bottom: 30px;
+    text-decoration-line: underline;
+    color: rgb(121, 31, 31);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+}
+
+.game-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2%;  
+}
+
+.game1 {
+    flex: 0 1 48%;
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.game1 h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: rgb(63, 18, 18);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+}
+
+.game1 img {
+    max-width: 80%;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.tran:hover{
+    transform: scale(1.1);
+    border: 5px solid white;
+}
+
